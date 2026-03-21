@@ -6,19 +6,23 @@ interface IProps {
 	placeholder: string;
 	value: string;
 	error?: string;
+	description?: string;
 	label?: string;
 	isRequired?: boolean;
 	onChange: (value: string) => void;
 	options: Array<{ value: string, label: string, description?: string; color?: string }>
 }
 
-const CustomSelect: React.FC<IProps> = ({ placeholder, options, value, onChange, error, label, isRequired }) => {
+const CustomSelect: React.FC<IProps> = ({ placeholder, options, value, onChange, error, label, isRequired, description }) => {
 	return (
 		<div>
-			{label && <label className="text-[14px] ml-2 items-center">
-				{label}
-				{isRequired && <span className="text-(--color-danger)"> *</span>}
-			</label>}
+			<div className="flex flex-col">
+				{label && <label className="text-[14px] ml-2 items-center">
+					{label}
+					{isRequired && <span className="text-(--color-danger)"> *</span>}
+				</label>}
+				{description && <span className="text-[12px] ml-2 items-center text-muted-foreground">{description}</span>}
+			</div>
 			<Select value={value} onValueChange={onChange}>
 				<SelectTrigger className={
 					cn(error && 'border-(--color-danger)', 'focus:outline-none focus-visible:ring-0 focus-visible:border-input min-w-full')

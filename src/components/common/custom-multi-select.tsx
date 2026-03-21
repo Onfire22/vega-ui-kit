@@ -21,7 +21,7 @@ interface IProps {
 	placeholder?: string
 }
 
-export const CustomMultiSelect: React.FC<IProps> = ({ options, label, placeholder, values, setValues }) => {
+const CustomMultiSelect: React.FC<IProps> = ({ options, label, placeholder, values, setValues }) => {
 	const anchor = useComboboxAnchor()
 
 	return (
@@ -72,3 +72,5 @@ export const CustomMultiSelect: React.FC<IProps> = ({ options, label, placeholde
 		</div>
 	)
 }
+
+export { CustomMultiSelect };
