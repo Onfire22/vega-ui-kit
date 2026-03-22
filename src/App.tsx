@@ -9,6 +9,7 @@ import {CustomBadge} from "@/components/common/custom-badge.tsx";
 import {CustomTabs} from "@/components/common/custom-tabs.tsx";
 import {AppWindowIcon} from "lucide-react";
 import {CustomTooltip} from "@/components/common/custom-tooltip.tsx";
+import {CustomPopover} from "@/components/common/custom-popover.tsx";
 
 const App = () => {
   const [value, setValue] = useState('123');
@@ -18,6 +19,8 @@ const App = () => {
   const [inputVal, setInputVal] = useState('');
 
   const [tab, setActiveTab] = useState('table');
+
+  const [isOpened, setIsOpened] = useState(false);
 
   const handleSelectChange = (value: string) => {
     setValue(value);
@@ -29,6 +32,10 @@ const App = () => {
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
+  }
+
+  const handleSetOpened = (value: boolean) => {
+    setIsOpened(value);
   }
 
   return (
@@ -44,7 +51,6 @@ const App = () => {
       />
       <CustomMultiSelect options={[{ value: '123', label: 'FE' }, { value: '456', label: 'BE' }, { value: '789', label: 'QA' }]} label="asdasdas" placeholder="найти спек" values={values} setValues={setValues} />
       <Button>123</Button>
-      <CustomPasswordInput type="text" id="login" placeholder="login" label="Ваш логин" value={inputVal} onChange={handleChangeInput} />
       <CustomModal trigger={<Button>Open modal</Button>} title="Создать задачу" description="создать новую задачу">
         <div>контент модалки</div>
       </CustomModal>
@@ -56,6 +62,17 @@ const App = () => {
       <CustomBadge text="todo" variant="danger" />
       <CustomTabs variant="line" defaultValue={tab} triggers={[{ value: 'table', text: 'таблица', icon: <AppWindowIcon />  }, { value: 'kanban', text: 'канбан' }]} onChange={handleTabChange} />
       <CustomTooltip trigger={<span>trigger test</span>} content="tooltip content" position="top" />
+
+      <CustomPopover trigger={
+        <div>
+          <CustomPasswordInput type="text" id="password" placeholder="*******" label="Ваш пароль" value={inputVal} onChange={handleChangeInput} />
+        </div>
+      }
+       content={<div><span onClick={() => handleSetOpened(false)}>X</span>контент</div>}
+        isOpen={isOpened}
+        setIsOpened={setIsOpened}
+       width="100px"
+      />
     </div>
   )
 }
